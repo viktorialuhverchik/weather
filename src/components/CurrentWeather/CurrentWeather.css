@@ -1,0 +1,8 @@
+.current-weather_card{
+    margin-top: 1rem;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
