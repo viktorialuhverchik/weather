@@ -1,9 +1,9 @@
-.app-header{
-  background-color: #282c34;
+.app-header {
+  background-color: #ccd0fc;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #61dafb;
+  color: #1f30cc;
   margin-bottom: 1rem;
 }

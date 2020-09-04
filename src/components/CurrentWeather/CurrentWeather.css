@@ -1,8 +1,35 @@
-.current-weather_card{
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.weather-card {
     margin-top: 1rem;
     width: 80%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    margin-top: 1rem;
+}
+
+.app-link {
+    text-decoration: none;
+}
+
+.cities-card {
+    margin-top: 1rem;
+    padding: 0 2rem;
+}
+
+.app-select_city {
+    width: 80%;
     align-items: center;
     justify-content: center;
 }

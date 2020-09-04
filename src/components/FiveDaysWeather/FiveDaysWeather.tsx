@@ -1,45 +1,32 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import React, {useState} from 'react';
+import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import { getCurrentWeather } from '../../actions/actionsCreator';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { getFiveDaysWeather } from '../../actions/actionsCreator';
 
-import './CurrentWeather.css';
+export default function FiveDaysWeather() {
 
-
-function CurrentWeather(props: any) {
-    console.log(props);
     const [city, setCity] = useState({
         label: '',
         value: {}
     });
 
-    const [currentWeather, setCurrentWeather] = useState({
-        base: "",
-        clouds: {all: ""},
-        cod: "",
-        coord: {lon: "", lat: ""},
-        dt: "",
-        id: "",
-        main: {temp: 0, feels_like: "", temp_min: "", temp_max: "", pressure: "", humidity: ""},
-        name: "",
-        sys: {type: "", id: "", country: "", sunrise: "", sunset: ""},
-        timezone: "",
-        visibility: "",
-        weather: [{id: "", main: "", description: "", icon: ""}],
-        wind: {speed: "", deg: ""},
-    });
+    const [fiveDaysWeather, setFiveDaysWeather] = useState({list: [
+        { main: {temp: 0}}
+    ]});
 
     async function getData(city: any) {
         setCity(city);
         localStorage.setItem("city", city.label.split(',', 1));
-        let currentWeather = await getCurrentWeather(city.label.split(',', 1));
-        setCurrentWeather(currentWeather);
+        let fiveDaysWeather = await getFiveDaysWeather(city.label.split(',', 1));
+        setFiveDaysWeather(fiveDaysWeather);
+        console.log(fiveDaysWeather);
+        fiveDaysWeather.list.slice(0,5).forEach((item: any) => console.log(item.main.temp));
     };
 
     const selectedCities = localStorage.getItem("city");
+
 
     return (
         <div className="app-container">
@@ -62,8 +49,12 @@ function CurrentWeather(props: any) {
                 </Link>
             </div>
             <Card className="weather-card">
-                <h2>Today weather in : {!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h2>
-                <h3>{currentWeather.weather[0].description}</h3>
+                <h2>Weather for five days in {city.label.split(',', 1)}:</h2>
+                {fiveDaysWeather.list.slice(0,5).forEach((item: any) => {return (
+                    <div>
+                        <h3>{item.main.temp.toFixed(0)}&#176;C</h3>
+                    </div>
+                );})}
             </Card>
             <Card className="cities-card">
                 <h4>{selectedCities}</h4>
@@ -71,6 +62,3 @@ function CurrentWeather(props: any) {
         </div>
     )
 }
-
-
-export default CurrentWeather;
