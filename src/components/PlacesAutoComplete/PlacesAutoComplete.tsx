@@ -3,28 +3,29 @@ import { connect } from 'react-redux';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 import './PlacesAutoComplete.css';
+import { SELECT_CITY } from '../../types';
 
-function PlacesAutoComplete() {
+function PlacesAutoComplete({ dispatch }: any) {
 
-    const [city, setCity] = useState({
+    const [selectedCity, setSelectedCity] = useState({
         label: '',
         value: {}
     });
 
     function getData(city: any) {
-        setCity(city);
-        localStorage.setItem("city", city.label.split(',', 1));
-        return city;
+        setSelectedCity(city);
+        dispatch({
+            type: SELECT_CITY,
+            name: city.label.split(',', 1)
+        });
     };
-
-    const selectedCities = localStorage.getItem("city");
 
     return (
         <div className="app-select_city">
             <GooglePlacesAutocomplete
                 apiKey='AIzaSyCVTVRvhts70T-KlhGw14mejDBAVFTlb7w'
                 selectProps={{
-                    city,
+                    selectedCity,
                     onChange: getData
                 }}
             />
@@ -32,9 +33,4 @@ function PlacesAutoComplete() {
     )
 }
 
-const mapStateToProps = (state: any) => {
-    console.log(state.city);
-    return state;
-}
-
-export default connect(mapStateToProps, null)(PlacesAutoComplete);
+export default connect()(PlacesAutoComplete);

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import { getCurrentWeather } from '../../actions/actionsCreator';
@@ -9,13 +8,8 @@ import { getCurrentWeather } from '../../actions/actionsCreator';
 import './CurrentWeather.css';
 
 
-function CurrentWeather(props: any) {
-    console.log(props);
-    const [city, setCity] = useState({
-        label: '',
-        value: {}
-    });
-
+const CurrentWeather = (props: any) => {
+    console.log("test");
     const [currentWeather, setCurrentWeather] = useState({
         base: "",
         clouds: {all: ""},
@@ -32,27 +26,15 @@ function CurrentWeather(props: any) {
         wind: {speed: "", deg: ""},
     });
 
-    async function getData(city: any) {
-        setCity(city);
-        localStorage.setItem("city", city.label.split(',', 1));
-        let currentWeather = await getCurrentWeather(city.label.split(',', 1));
+    async function getData() {
+        let currentWeather = await getCurrentWeather(props.city.name);
         setCurrentWeather(currentWeather);
     };
 
-    const selectedCities = localStorage.getItem("city");
+    // getData();
 
     return (
         <div className="app-container">
-            <div className="app-select_city">
-                <GooglePlacesAutocomplete
-                    apiKey='AIzaSyCVTVRvhts70T-KlhGw14mejDBAVFTlb7w'
-                    selectProps={{
-                        city,
-                        onChange: getData,
-                        options: selectedCities
-                    }}
-                />
-            </div>
             <div className="buttons">
                 <Link to="/" className="app-link">
                     <Button variant="contained" color="primary" className="button-today">Today</Button>
@@ -62,15 +44,17 @@ function CurrentWeather(props: any) {
                 </Link>
             </div>
             <Card className="weather-card">
-                <h2>Today weather in : {!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h2>
+                <h2>Today weather in {props.city.name} : {!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h2>
                 <h3>{currentWeather.weather[0].description}</h3>
-            </Card>
-            <Card className="cities-card">
-                <h4>{selectedCities}</h4>
             </Card>
         </div>
     )
 }
 
+const mapStateToProps = (state: any) => {
+    return {
+        city: state.city
+    };
+}
 
-export default CurrentWeather;
+export default connect(mapStateToProps)(CurrentWeather);

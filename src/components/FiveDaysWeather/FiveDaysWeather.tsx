@@ -1,45 +1,24 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { getFiveDaysWeather } from '../../actions/actionsCreator';
 
-export default function FiveDaysWeather() {
-
-    const [city, setCity] = useState({
-        label: '',
-        value: {}
-    });
+const FiveDaysWeather = (props: any) => {
 
     const [fiveDaysWeather, setFiveDaysWeather] = useState({list: [
         { main: {temp: 0}}
     ]});
 
-    async function getData(city: any) {
-        setCity(city);
-        localStorage.setItem("city", city.label.split(',', 1));
-        let fiveDaysWeather = await getFiveDaysWeather(city.label.split(',', 1));
+    async function getData() {
+        let fiveDaysWeather = await getFiveDaysWeather(props.city.name);
+        fiveDaysWeather.list.slice(0,5);
         setFiveDaysWeather(fiveDaysWeather);
-        console.log(fiveDaysWeather);
-        fiveDaysWeather.list.slice(0,5).forEach((item: any) => console.log(item.main.temp));
     };
-
-    const selectedCities = localStorage.getItem("city");
-
 
     return (
         <div className="app-container">
-            <div className="app-select_city">
-                <GooglePlacesAutocomplete
-                    apiKey='AIzaSyCVTVRvhts70T-KlhGw14mejDBAVFTlb7w'
-                    selectProps={{
-                        city,
-                        onChange: getData,
-                        options: selectedCities
-                    }}
-                />
-            </div>
             <div className="buttons">
                 <Link to="/" className="app-link">
                     <Button variant="contained" color="primary" className="button-today">Today</Button>
@@ -49,16 +28,21 @@ export default function FiveDaysWeather() {
                 </Link>
             </div>
             <Card className="weather-card">
-                <h2>Weather for five days in {city.label.split(',', 1)}:</h2>
-                {fiveDaysWeather.list.slice(0,5).forEach((item: any) => {return (
+                <h2>Weather for five days in {props.city.name}:</h2>
+                {fiveDaysWeather.list.map((item: any) => {return (
                     <div>
                         <h3>{item.main.temp.toFixed(0)}&#176;C</h3>
                     </div>
                 );})}
             </Card>
-            <Card className="cities-card">
-                <h4>{selectedCities}</h4>
-            </Card>
         </div>
     )
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        city: state.city
+    };
+}
+
+export default connect(mapStateToProps)(FiveDaysWeather);
