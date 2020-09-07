@@ -22,14 +22,3 @@
 .app-link {
     text-decoration: none;
 }
-
-.cities-card {
-    margin-top: 1rem;
-    padding: 0 2rem;
-}
-
-.app-select_city {
-    width: 80%;
-    align-items: center;
-    justify-content: center;
-}
