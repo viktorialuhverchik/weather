@@ -1,13 +1,12 @@
-import { CREATE_HISTORY } from '../types';
+import { UPDATE_HISTORY } from '../types';
 
-const initialState: any = {
-    history: []
-};
+const initialState: any = [];
 
 export const historyReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case CREATE_HISTORY:
-            return {...state, history: action.payload};
+        case UPDATE_HISTORY:
+            state.push(action.history);
+            return state;
         default: 
             return state;
     }

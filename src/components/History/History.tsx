@@ -3,37 +3,21 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 
 import './History.css';
-import { CREATE_HISTORY } from '../../types';
-
 
 const History = (props: any) => {
 
-    // const [history, setHistory] = useState([]);
-
-    // function createHistory(city: any) {
-        // setHistory(history);
-        // dispatch({
-        //     type: CREATE_HISTORY,
-        //     history: history.push(city)
-        // });
-        // localStorage.setItem("history", JSON.stringify(history));
-    // }
-
-    // createHistory(props.city.name);
-
-
     return (
         <Card className= "history-card">
-            {/* {history.map(item => <div key={item}>{item}</div>)} */}
+            {props.history.map((item: any) => <span key={item}>{item}</span>)}
         </Card>
 
     );
 }
 
-// const mapStateToProps = (state: any) => {
-//     return {
-//         city: state.city
-//     };
-// };
+const mapStateToProps = (state: any) => {
+    return {
+        history: state.history
+    };
+};
 
-export default connect()(History);
+export default connect(mapStateToProps)(History);

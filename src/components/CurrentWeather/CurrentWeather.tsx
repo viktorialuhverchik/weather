@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
@@ -15,10 +15,14 @@ const CurrentWeather = (props: any) => {
         weather: [{id: "", main: "", description: "", icon: ""}],
     });
 
-    async function getWeather() {
-        let weather = await getCurrentWeather(props.city.name);
-        setCurrentWeather(weather);
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            let weather = await getCurrentWeather(props.city.name);
+            setCurrentWeather(weather);
+        }
+        
+        fetchData();
+    }, [props.city]);
 
     return (
         <div className="app-container">

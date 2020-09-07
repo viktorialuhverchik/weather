@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import './PlacesAutoComplete.css';
-import { SELECT_CITY, CREATE_HISTORY } from '../../types';
+import { SELECT_CITY, UPDATE_HISTORY } from '../../types';
 
 const PlacesAutoComplete = ({ dispatch }: any) => {
 
@@ -13,13 +13,14 @@ const PlacesAutoComplete = ({ dispatch }: any) => {
 
     function setCityName(city: any) {
         setSelectedCity(city);
+        const cityName = city.label.split(',')[0];
         dispatch({
             type: SELECT_CITY,
-            name: city.label.split(',', 1)
+            name: cityName
         });
         dispatch({
-            type: CREATE_HISTORY,
-            payload: city.label.split(',', 1)
+            type: UPDATE_HISTORY,
+            history: cityName
         });
     };
 

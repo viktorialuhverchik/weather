@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
@@ -11,12 +11,15 @@ const FiveDaysWeather = (props: any) => {
         { main: { temp: 0 } }
     ]});
 
-    async function getWeather() {
-        let weather = await getFiveDaysWeather(props.city.name);
-        weather.list.slice(0,5);
-        setFiveDaysWeather(weather);
-        console.log(weather);
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            let weather = await getFiveDaysWeather(props.city.name);
+            weather.list = weather.list.slice(0,5);
+            setFiveDaysWeather(weather);
+        }
+        
+        fetchData();
+    }, [props.city]);
 
     return (
         <div className="app-container">
@@ -25,7 +28,7 @@ const FiveDaysWeather = (props: any) => {
                     <Button variant="contained" color="primary" className="button-today">Today</Button>
                 </Link>
                 <Link to="/fivedays" className="app-link">
-                    <Button variant="contained" color="primary" onClick={getWeather}>Five days</Button>
+                    <Button variant="contained" color="primary">Five days</Button>
                 </Link>
             </div>
             <Card className="weather-card">
