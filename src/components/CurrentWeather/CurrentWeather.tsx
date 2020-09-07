@@ -36,7 +36,7 @@ const CurrentWeather = (props: any) => {
             </Card>
         </div>
     )
-}
+};
 
 const mapStateToProps = (state: any) => {
     return {

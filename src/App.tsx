@@ -8,7 +8,7 @@ import FiveDaysWeather from './components/FiveDaysWeather/FiveDaysWeather';
 
 import './App.css';
 
-function App() {
+const App = () => {
 
   return (
     <div className="App">

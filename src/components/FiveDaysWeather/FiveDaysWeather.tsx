@@ -37,7 +37,7 @@ const FiveDaysWeather = (props: any) => {
             </Card>
         </div>
     )
-}
+};
 
 const mapStateToProps = (state: any) => {
     return {
