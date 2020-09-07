@@ -15,6 +15,7 @@ const FiveDaysWeather = (props: any) => {
         let weather = await getFiveDaysWeather(props.city.name);
         weather.list.slice(0,5);
         setFiveDaysWeather(weather);
+        console.log(weather);
     };
 
     return (
@@ -24,7 +25,7 @@ const FiveDaysWeather = (props: any) => {
                     <Button variant="contained" color="primary" className="button-today">Today</Button>
                 </Link>
                 <Link to="/fivedays" className="app-link">
-                    <Button variant="contained" color="primary">Five days</Button>
+                    <Button variant="contained" color="primary" onClick={getWeather}>Five days</Button>
                 </Link>
             </div>
             <Card className="weather-card">

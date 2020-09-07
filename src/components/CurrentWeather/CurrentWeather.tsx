@@ -30,10 +30,10 @@ const CurrentWeather = (props: any) => {
                     <Button variant="contained" color="primary">Five days</Button>
                 </Link>
             </div>
-            <Card className="weather-card">
-                <h2>Today weather in {props.city.name}: {!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h2>
-                <h3>{currentWeather.weather[0].description}</h3>
-            </Card>
+                <Card className="weather-card">
+                    <h2>Today weather in {props.city.name}: {!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h2>
+                    <h3>{currentWeather.weather[0].description}</h3>
+                </Card>
         </div>
     )
 };

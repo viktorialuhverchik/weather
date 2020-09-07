@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentWeather } from '../../actions/actionsCreator';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-
 import './PlacesAutoComplete.css';
-import { SELECT_CITY } from '../../types';
+import { SELECT_CITY, CREATE_HISTORY } from '../../types';
 
 const PlacesAutoComplete = ({ dispatch }: any) => {
 
@@ -19,6 +17,10 @@ const PlacesAutoComplete = ({ dispatch }: any) => {
             type: SELECT_CITY,
             name: city.label.split(',', 1)
         });
+        dispatch({
+            type: CREATE_HISTORY,
+            payload: city.label.split(',', 1)
+        });
     };
 
     return (
@@ -32,6 +34,7 @@ const PlacesAutoComplete = ({ dispatch }: any) => {
             />
         </div>
     )
-}
+};
+
 
 export default connect()(PlacesAutoComplete);
