@@ -1,2 +1,7 @@
 .app-select_city {
+    margin-top: 2vh;
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

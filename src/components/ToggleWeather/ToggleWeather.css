@@ -1,0 +1,21 @@
+.toggle-weather_container {
+    margin: 2vh 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.app-link, .app-link:hover {
+    text-decoration: none;
+    color: #1a2ab4;
+}
+
+.today{
+    margin-right: 10vw;
+}
+
+.active {
+    text-decoration: overline;
+}

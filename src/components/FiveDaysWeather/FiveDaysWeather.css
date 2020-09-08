@@ -1,27 +1,28 @@
-.history-card_wrapper {
-    margin: 2vh 0;
+.fivedays-weather_card {
+    margin: 2vh;
+    width: 80%;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.day-weather_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.day-weather_card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.history-card {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.history-name {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.fa {
-    margin-left: 1em;
-    margin-block-end: 0.5em;
+h6 {
+    padding: 0.5em
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { SELECT_CITY, UPDATE_HISTORY } from '../../redux/types';
+
 import './PlacesAutoComplete.css';
-import { SELECT_CITY, UPDATE_HISTORY } from '../../types';
 
 const PlacesAutoComplete = ({ dispatch }: any) => {
 

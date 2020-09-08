@@ -1,4 +1,4 @@
-.app-container {
+.card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,19 +6,21 @@
 
 }
 
-.weather-card {
-    margin-top: 1rem;
+.today-weather_card {
+    margin-top: 2vh;
     width: 80%;
+    padding: 0 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.buttons {
-    margin-top: 1rem;
+.today-weather_info {
+    display: flex;
+    flex-direction: row;
 }
 
-.app-link {
-    text-decoration: none;
+.today-weather_image {
+    margin-left: 1em;
 }

@@ -1,15 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
+import { Box, Button } from '@material-ui/core';
+
 
 import './History.css';
 
 const History = (props: any) => {
 
+    // const [history, setHistory] = useState([]);
+    
+
+    // useEffect(() => {
+    //     let history: any = localStorage.getItem("history");
+    //     let formattedHistory = JSON.parse(history);
+    //     setHistory(formattedHistory);
+    // }, [props.history]);
+
+    let history: any = localStorage.getItem("history");
+    let formattedHistory = JSON.parse(history);
+
+        
+
     return (
-        <Card className= "history-card">
-            {props.history.map((item: any) => <span key={item}>{item}</span>)}
-        </Card>
+        <div className= "history-card_wrapper">
+            <Box className= "history-card">
+                {formattedHistory.map((item: any, index: number) => {
+                    return (
+                        <div className="history-name" key={index}>
+                            <h5>{item}</h5>
+                            <i className="fa fa-trash" aria-hidden="true"></i>
+                        </div>
+                    );
+                })}
+            </Box>
+        </div>
 
     );
 }

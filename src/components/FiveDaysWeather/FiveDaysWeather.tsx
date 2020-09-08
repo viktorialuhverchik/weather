@@ -1,41 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import { getFiveDaysWeather } from '../../actions/actionsCreator';
+import { getFiveDaysWeather } from '../../services/services';
+import './FiveDaysWeather.css';
 
 const FiveDaysWeather = (props: any) => {
 
     const [fiveDaysWeather, setFiveDaysWeather] = useState({list: [
-        { main: { temp: 0 } }
+        { 
+            dt: 0,
+            main: { temp: 0 },
+            weather: [{id: "", main: "", description: "", icon: ""}]
+        }
     ]});
+
+    const [weatherDictionary, setweatherDictionary] = useState({
+        dt: 0,
+        main: {temp: 0},
+        weather: [{id: "", main: "", description: "", icon: ""}]
+    });
 
     useEffect(() => {
         const fetchData = async () => {
             let weather = await getFiveDaysWeather(props.city.name);
-            weather.list = weather.list.slice(0,5);
             setFiveDaysWeather(weather);
+            console.log(weather);
+            let weatherDictionary: any = {};
+            weather.list.map((item: any) => {
+                let date = new Date(item.dt*1000).getDate();
+                weatherDictionary[date] = item;
+                setweatherDictionary(weatherDictionary);
+            })
+            console.log(weatherDictionary);
         }
         
         fetchData();
+
     }, [props.city]);
 
     return (
-        <div className="app-container">
-            <div className="buttons">
-                <Link to="/" className="app-link">
-                    <Button variant="contained" color="primary" className="button-today">Today</Button>
-                </Link>
-                <Link to="/fivedays" className="app-link">
-                    <Button variant="contained" color="primary">Five days</Button>
-                </Link>
-            </div>
-            <Card className="weather-card">
-                <h2>Weather for five days in {props.city.name}:</h2>
-                {fiveDaysWeather.list.map((item: any) => {return (
-                    <div key={item}>
-                        <h3>{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h3>
+        <div className="card-container">
+            <h3>Weather for five days in {props.city.name}:</h3>
+            <Card className="fivedays-weather_card">
+                {/* {Object.values(weatherDictionary).map((item: any, index: number) => {
+                    return (
+                        <div className="day-weather_container" key={index}>
+                            <h5>{new Date(item.dt*1000).toLocaleDateString("en-US")}</h5>
+                            <Card className="day-weather_card">
+                                <h6>{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h6>
+                                <h6>{item.weather[0].main}</h6>
+                            </Card>
+                        </div>
+                );})} */}
+                {fiveDaysWeather.list.map((item: any, index: number) => {
+                return (
+                    <div className="day-weather_container" key={index}>
+                        <h5>{new Date(item.dt*1000).toLocaleDateString("en-US")}</h5>
+                        <Card className="day-weather_card">
+                            <h6>{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h6>
+                            <h6>{item.weather[0].main}</h6>
+                        </Card>
                     </div>
                 );})}
             </Card>

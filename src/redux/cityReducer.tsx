@@ -1,4 +1,4 @@
-import { SELECT_CITY } from '../types';
+import { SELECT_CITY } from './types';
 
 const initialState = {
     name: "London"
