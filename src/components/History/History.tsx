@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Box, Button } from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import { DELETE_HISTORY } from '../../redux/types';
 
 
 import './History.css';
 
 const History = (props: any) => {
 
-    // const [history, setHistory] = useState([]);
-    
-
-    // useEffect(() => {
-    //     let history: any = localStorage.getItem("history");
-    //     let formattedHistory = JSON.parse(history);
-    //     setHistory(formattedHistory);
-    // }, [props.history]);
-
-    let history: any = localStorage.getItem("history");
-    let formattedHistory = JSON.parse(history);
-
-        
-
     return (
         <div className= "history-card_wrapper">
             <Box className= "history-card">
-                {formattedHistory.map((item: any, index: number) => {
+                {props.history.map((item: any, index: number) => {
                     return (
                         <div className="history-name" key={index}>
                             <h5>{item}</h5>
-                            <i className="fa fa-trash" aria-hidden="true"></i>
+                            <i className="fa fa-trash" aria-hidden="true" onClick={() => {props.deleteHistory(item, index)}}></i>
                         </div>
                     );
                 })}
@@ -44,4 +31,16 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect(mapStateToProps)(History);
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        deleteHistory: (city: any, index: number) => {
+            
+            dispatch({
+                type: DELETE_HISTORY,
+                history: city
+            });
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(History);

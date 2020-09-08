@@ -5,25 +5,12 @@ import { SELECT_CITY, UPDATE_HISTORY } from '../../redux/types';
 
 import './PlacesAutoComplete.css';
 
-const PlacesAutoComplete = ({ dispatch }: any) => {
+const PlacesAutoComplete = (props: any) => {
 
     const [selectedCity, setSelectedCity] = useState({
         label: '',
         value: {}
     });
-
-    function setCityName(city: any) {
-        setSelectedCity(city);
-        const cityName = city.label.split(',')[0];
-        dispatch({
-            type: SELECT_CITY,
-            name: cityName
-        });
-        dispatch({
-            type: UPDATE_HISTORY,
-            history: cityName
-        });
-    };
 
     return (
         <div className="app-select_city">
@@ -31,12 +18,30 @@ const PlacesAutoComplete = ({ dispatch }: any) => {
                 apiKey='AIzaSyCVTVRvhts70T-KlhGw14mejDBAVFTlb7w'
                 selectProps={{
                     selectedCity,
-                    onChange: setCityName
+                    onChange: (city: any) => {
+                        setSelectedCity(city);
+                        props.setCityName(city)
+                    } 
                 }}
             />
         </div>
     )
 };
 
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        setCityName: (city: any) => {
+            const cityName = city.label.split(',')[0];
+            dispatch({
+                type: SELECT_CITY,
+                name: cityName
+            });
+            dispatch({
+                type: UPDATE_HISTORY,
+                history: cityName
+            });
+        }
+    }
+}
 
-export default connect()(PlacesAutoComplete);
+export default connect(null, mapDispatchToProps)(PlacesAutoComplete);

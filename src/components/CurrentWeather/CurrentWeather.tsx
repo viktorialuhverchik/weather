@@ -23,8 +23,7 @@ const CurrentWeather = (props: any) => {
             let weather = await getCurrentWeather(props.city.name);
             setCurrentWeather(weather);
             console.log(weather);
-        }
-        
+        };
         fetchData();
     }, [props.city]);
     
@@ -35,7 +34,7 @@ const CurrentWeather = (props: any) => {
                     (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h4>
                 <div className="today-weather_info">
                     <h5>{currentWeather.weather[0].main}</h5>
-                    <img src={`/images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img>
+                    <img src={`../../images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img>
                 </div>
             </Card>
         </div>
