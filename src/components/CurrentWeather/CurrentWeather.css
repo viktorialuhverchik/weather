@@ -16,6 +16,10 @@
     justify-content: center;
 }
 
+.today-date {
+    margin-top: 0.5em;
+}
+
 .today-weather_info {
     display: flex;
     flex-direction: row;

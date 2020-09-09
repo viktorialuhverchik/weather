@@ -20,21 +20,27 @@ const CurrentWeather = (props: any) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            let weather = await getCurrentWeather(props.city.name);
-            setCurrentWeather(weather);
-            console.log(weather);
+            try {
+                let weather = await getCurrentWeather(props.city.name);
+                setCurrentWeather(weather);
+            } catch(error) {
+                console.log(error);
+            }
         };
+
         fetchData();
+
     }, [props.city]);
     
     return (
         <div className="card-container">
+            <h4>Today weather in {props.city.name}</h4>
             <Card className="today-weather_card">
-                <h4>{formattedDate} <br/> weather in {props.city.name}: {!currentWeather.main.temp ? "" : 
-                    (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h4>
+                <h4 className="today-date">{formattedDate}</h4> 
+                <h4>{!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h4>
                 <div className="today-weather_info">
-                    <h5>{currentWeather.weather[0].main}</h5>
-                    <img src={`../../images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img>
+                    <h6>{currentWeather.weather[0].main}</h6>
+                    {/* <img src={`../../images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img> */}
                 </div>
             </Card>
         </div>

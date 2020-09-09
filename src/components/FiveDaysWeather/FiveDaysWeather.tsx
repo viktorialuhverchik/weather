@@ -10,18 +10,24 @@ const FiveDaysWeather = (props: any) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            let weather = await getFiveDaysWeather(props.city.name);
-            let weatherDictionary: any = {};
-            weather.list.forEach((item: any) => {
-                let date = new Date(item.dt*1000).getDate();
-                weatherDictionary[date] = item;
-            })
-            setFiveDaysWeather(weatherDictionary);
-        }
+            try {
+                let weather = await getFiveDaysWeather(props.city.name);
+                let weatherDictionary: any = {};
+                weather.list.forEach((item: any) => {
+                    let date = new Date(item.dt*1000).getDate();
+                    weatherDictionary[date] = item;
+                })
+                setFiveDaysWeather(weatherDictionary);
+            } catch(error) {
+                console.log(error);
+            }
+        };
         
         fetchData();
 
     }, [props.city]);
+
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     return (
         <div className="card-container">
@@ -30,9 +36,9 @@ const FiveDaysWeather = (props: any) => {
                 {Object.values(fiveDaysWeather).map((item: any, index: number) => {
                     return (
                         <div className="day-weather_container" key={index}>
-                            <h5>{new Date(item.dt*1000).toLocaleDateString("en-US")}</h5>
                             <Card className="day-weather_card">
-                                <h6>{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h6>
+                                <h5>{new Date(item.dt*1000).toLocaleDateString("en-US", options)}</h5>
+                                <h4>{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h4>
                                 <h6>{item.weather[0].main}</h6>
                             </Card>
                         </div>
