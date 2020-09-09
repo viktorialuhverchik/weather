@@ -8,8 +8,7 @@
 
 .today-weather_card {
     margin-top: 2vh;
-    width: 80%;
-    padding: 0 5vw;
+    padding: 0 1vw;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Card, CircularProgress } from '@material-ui/core';
+import { Card } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import { getCurrentWeather } from '../../services/services';
 
 import './CurrentWeather.css';
@@ -31,16 +32,16 @@ const CurrentWeather = (props: any) => {
         fetchData();
 
     }, [props.city]);
-    
+
     return (
         <div className="card-container">
-            <h4>Today weather in {props.city.name}</h4>
+            <h3>Today weather in {props.city.name}</h3>
             <Card className="today-weather_card">
                 <h4 className="today-date">{formattedDate}</h4> 
-                <h4>{!currentWeather.main.temp ? "" : (currentWeather.main.temp-273.15).toFixed(0)} &#176;C</h4>
+                <h4>{!currentWeather.main ? <Alert severity="error">This is an error — check your city!</Alert> : (currentWeather.main.temp-273.15).toFixed(0)}&#176;C</h4>
                 <div className="today-weather_info">
-                    <h6>{currentWeather.weather[0].main}</h6>
-                    {/* <img src={`../../images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img> */}
+                    <h6>{!currentWeather.weather ? "" : currentWeather.weather[0].main}</h6>
+                    {/* <img src={`/images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img> */}
                 </div>
             </Card>
         </div>

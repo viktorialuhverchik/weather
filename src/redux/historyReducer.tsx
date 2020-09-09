@@ -11,12 +11,12 @@ export const historyReducer = (state = initialState, action: any) => {
             if(history.length === 10) {
                 history.pop();
             }
-            let newHistory = history.filter((item: any) => item != action.history);
+            let newHistory = history.filter((item: any) => item !== action.history);
             newHistory.unshift(action.history);
             localStorage.setItem("history", JSON.stringify(newHistory));
             return newHistory;
         case DELETE_HISTORY:
-            const updatedHistory = state.filter((item: any) => item != action.history );
+            const updatedHistory = state.filter((item: any) => item !== action.history );
             localStorage.setItem("history", JSON.stringify(updatedHistory));
             return updatedHistory;
         default: 

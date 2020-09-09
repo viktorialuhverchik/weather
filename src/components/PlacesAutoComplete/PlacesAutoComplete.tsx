@@ -21,7 +21,7 @@ const PlacesAutoComplete = (props: any) => {
                     onChange: (city: any) => {
                         setSelectedCity(city);
                         props.setCityName(city)
-                    } 
+                    }
                 }}
             />
         </div>
@@ -42,6 +42,6 @@ const mapDispatchToProps = (dispatch: any) => {
             });
         }
     }
-}
+};
 
 export default connect(null, mapDispatchToProps)(PlacesAutoComplete);

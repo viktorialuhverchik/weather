@@ -1,6 +1,5 @@
 .fivedays-weather_card {
-    margin: 2vh;
-    width: 80%;
+    margin-top: 2vh;
     padding: 1vh 1vw;
     display: flex;
     flex-wrap: wrap;
