@@ -1,9 +1,30 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import App from './App';
+import { renderWithRedux } from './index.test';
+import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { rootReducer } from './redux/rootReducer';
+import { BrowserRouter as Router } from "react-router-dom";
+import Header from './components/Header/Header';
+import PlacesAutoComplete from './components/PlacesAutoComplete/PlacesAutoComplete';
+import CurrentWeather from './components/CurrentWeather/CurrentWeather';
+import FiveDaysWeather from './components/FiveDaysWeather/FiveDaysWeather';
+import History from './components/History/History';
+import ToggleWeather from './components/ToggleWeather/ToggleWeather';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const store = createStore(rootReducer);
+
+describe('App component',() => {
+    it('should render App component', () => {
+        const wrapper = renderWithRedux(<App/>);
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('valid path should not redirect to CurrentWeather', () => {
+        const wrapper = mount(<Provider store={store}><Router><App/></Router></Provider>);
+        expect(wrapper.find(CurrentWeather)).toHaveLength(1);
+        expect(wrapper.find(FiveDaysWeather)).toHaveLength(0);
+    });
+
 });

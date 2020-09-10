@@ -1,6 +1,6 @@
 import { CREATE_HISTORY, UPDATE_HISTORY, DELETE_HISTORY } from './types';
 
-const initialState: any = [];
+export const initialState: any = [];
 
 export const historyReducer = (state = initialState, action: any) => {
     switch (action.type) {

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`city reducer should handle SELECT_CITY 1`] = `
+Object {
+  "name": undefined,
+}
+`;
+
+exports[`city reducer should return the initial state 1`] = `
+Object {
+  "name": "London",
+}
+`;
+
+exports[`history reducer should handle CREATE_HISTORY 1`] = `undefined`;
+
+exports[`history reducer should handle DELETE_HISTORY 1`] = `Array []`;
+
+exports[`history reducer should handle UPDATE_HISTORY 1`] = `
+Array [
+  undefined,
+]
+`;
+
+exports[`history reducer should return the initial state 1`] = `Array []`;
