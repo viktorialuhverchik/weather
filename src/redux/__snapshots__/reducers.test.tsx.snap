@@ -11,15 +11,3 @@ Object {
   "name": "London",
 }
 `;
-
-exports[`history reducer should handle CREATE_HISTORY 1`] = `undefined`;
-
-exports[`history reducer should handle DELETE_HISTORY 1`] = `Array []`;
-
-exports[`history reducer should handle UPDATE_HISTORY 1`] = `
-Array [
-  undefined,
-]
-`;
-
-exports[`history reducer should return the initial state 1`] = `Array []`;
