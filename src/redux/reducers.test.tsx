@@ -7,13 +7,14 @@ describe('history reducer', () => {
     });
     
     it('should handle CREATE_HISTORY', () => {
-        expect(historyReducer([], 
+        expect(historyReducer(
+            [], 
             {
             type: 'CREATE_HISTORY',
-            history: ["Test"]
+            history: ['Test']
             }
             ))
-            .toEqual(["Test"]);
+            .toEqual(['Test']);
     });
 
     it('should handle UPDATE_HISTORY', () => {
@@ -21,40 +22,47 @@ describe('history reducer', () => {
             [],
             {
                 type: 'UPDATE_HISTORY',
-                history: "London"
+                history: 'London'
             }
             ))
-            .toEqual(["London"]);
+            .toEqual(['London']);
 
         expect(historyReducer(
-            ["Paris"],
+            ['Paris'],
             {
                 type: 'UPDATE_HISTORY',
-                history: "London"
+                history: 'London'
             }
             ))
-            .toEqual(["London", "Paris"]);
+            .toEqual(['London', 'Paris']);
     });
 
     it('should handle DELETE_HISTORY', () => {
         expect(historyReducer(
-            ["London", "Paris"],
+            ['London', 'Paris'],
             {
                 type: 'DELETE_HISTORY',
-                history: "Paris"
+                history: 'Paris'
             }
             ))
-            .toEqual(["London"]);
+            .toEqual(['London']);
     });
 });
 
 describe('city reducer', () => {
     it('should return the initial state', () => {
-        expect(cityReducer(undefined, 'London')).toMatchSnapshot()
+        expect(cityReducer(undefined, {})).toEqual({name: 'London'});
     });
-    
+
     it('should handle SELECT_CITY', () => {
-        expect(cityReducer(initState, {type: 'SELECT_CITY'})).toMatchSnapshot()
+        expect(cityReducer(
+            undefined, 
+            {
+            type: 'SELECT_CITY',
+            name: 'Paris'
+            }
+            ))
+            .toEqual({name: 'Paris'});
     });
 });
 

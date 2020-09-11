@@ -2,8 +2,8 @@ import React from 'react';
 import Header from './Header';
 import { shallow, render } from 'enzyme';
 
-describe('<Header />', () => {
-  it('renders Header', () => {
+describe('Header component', () => {
+  it('renders Header component', () => {
     const component = render(<Header/>);
     expect(component).toMatchSnapshot();
   });

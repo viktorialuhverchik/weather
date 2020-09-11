@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PlacesAutoComplete from './PlacesAutoComplete';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { renderWithRedux } from '../../index.test';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'
 
-describe('<PlacesAutoComplete />', () => {
-    it('renders PlacesAutoComplete', () => {
+describe('PlacesAutoComplete component', () => {
+    it('renders PlacesAutoComplete component', () => {
         const wrapper = renderWithRedux(<PlacesAutoComplete/>);
         expect(wrapper).toMatchSnapshot();
     });
 
-    // it('renders PlacesAutoComplete', () => {
-    //     const mockSetCity = jest.fn()
-    //     renderWithRedux(<PlacesAutoComplete onChange={mockSetCity} />)
-    
-    //     fireEvent.change(screen.getByPlaceholderText(""), {
-    //         target: { value: '' }
-    //     })
-        
-    //     expect(mockSetCity).toHaveBeenCalledTimes(0)
+    // it('should not call mockSetCity if length of text is 0', () => {
+    //     const mockSetCity = jest.fn();
+    //     let selectedCity = {
+    //         label: '',
+    //         value: {}
+    //     };
+    //     render(
+    //         <GooglePlacesAutocomplete selectProps={{
+    //             selectedCity,
+    //             onChange: (city: any) => {
+    //             mockSetCity(city)
+    //             }
+    //         }}/>
+    //     );
+
     // });
-
-
 });

@@ -13,9 +13,9 @@ describe('ToggleWeather component',() => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    // it('includes link to Mission scene', () => {                                       
-    //   const wrapper = shallow(<ToggleWeather/>);
-    //   expect(wrapper.find('Link').prop('to')).toBe('/');
-    // });
+    it('includes 2 link', () => {                                       
+      const wrapper = shallow(<ToggleWeather/>);
+      expect(wrapper.find('Link').length).toBe(2);
+    });
 
 });
