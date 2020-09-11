@@ -1,68 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Card, CircularProgress } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { getFiveDaysWeather } from '../../services/services';
+import { getFiveDaysWeather } from '../../redux/actions/actions';
 
 import './FiveDaysWeather.css';
 
-const FiveDaysWeather = (props: any) => {
+const FiveDaysWeather = () => {
 
-    const [fiveDaysWeather, setFiveDaysWeather] = useState({});
-
-    const [loading, setLoading] = useState(false);
-
-    function renderSpinner(loading: boolean) {
-        if(!loading) {
-            return;
-        } else {
-            return <CircularProgress/>
-        }
-    };
-
-    const [alert, setAlert] = useState(false);
-
-    function renderAlert(alert: boolean) {
-        if(!alert) {
-            return;
-        } else {
-            return <Alert severity="error">This is an error — check your city!</Alert>
-        }
-    }
+    const dispatch = useDispatch();
+    const city = useSelector((state: any) => state.city.name);
+    const fiveDaysWeather = useSelector((state: any) => state.weather.fiveDaysWeather);
+    const loading = useSelector((state: any) => state.loading);
+    const alert = useSelector((state: any) => state.alert); 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                let weather = await getFiveDaysWeather(props.city.name);
-                let weatherDictionary: any = {};
-                weather.list.forEach((item: any) => {
-                    let date = new Date(item.dt*1000).getDate();
-                    weatherDictionary[date] = item;
-                })
-                setFiveDaysWeather(weatherDictionary);
-                
-            } catch(error) {
-                console.log(error);
-                setAlert(true);
-            }
-            setLoading(false);
-            
-        };
-        
-        fetchData();
+        try {
+            dispatch(getFiveDaysWeather(city));
+        } catch(error) {
+            console.log(error);
+        }
+    }, [city]);
 
-    }, [props.city]);
+    if (loading) {
+        return <CircularProgress/>
+    };
 
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 
     return (
         <div className="card-container">
-            <h3>Weather for five days in {props.city.name}</h3>
+            <h3>Weather for five days in {city}</h3>
             <Card className="fivedays-weather_card">
-                {renderAlert(alert)}
-                {renderSpinner(loading)}
                 {(Object.values(fiveDaysWeather).map((item: any, index: number) => {
                     return (
                         <div className="day-weather_container" key={index}>
@@ -72,16 +42,11 @@ const FiveDaysWeather = (props: any) => {
                                 <h6>{item.weather[0].main}</h6>
                             </Card>
                         </div>
-                );}))}
+                    );
+                }))}
             </Card>
         </div>
     )
 };
 
-const mapStateToProps = (state: any) => {
-    return {
-        city: state.city
-    };
-};
-
-export default connect(mapStateToProps)(FiveDaysWeather);
+export default connect()(FiveDaysWeather);

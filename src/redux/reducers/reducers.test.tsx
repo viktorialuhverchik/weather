@@ -1,5 +1,5 @@
-import { historyReducer, initialState } from './historyReducer';
-import { cityReducer, initialState as initState  } from './cityReducer';
+import { historyReducer } from './historyReducer';
+import { cityReducer} from './cityReducer';
 
 describe('history reducer', () => {
     it('should return the initial state', () => {

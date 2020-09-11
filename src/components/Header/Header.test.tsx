@@ -4,8 +4,8 @@ import { shallow, render } from 'enzyme';
 
 describe('Header component', () => {
   it('renders Header component', () => {
-    const component = render(<Header/>);
-    expect(component).toMatchSnapshot();
+      const component = render(<Header/>);
+      expect(component).toMatchSnapshot();
   });
   
   it('has correct name', () => {

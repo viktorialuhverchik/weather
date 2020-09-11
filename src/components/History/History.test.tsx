@@ -4,8 +4,8 @@ import { renderWithRedux } from '../../index.test';
 
 describe('History component',() => {
   it('renders History component', () => {
-    const wrapper = renderWithRedux(<History/>);
-    expect(wrapper).toMatchSnapshot();
+      const wrapper = renderWithRedux(<History/>);
+      expect(wrapper).toMatchSnapshot();
   });
 
 });

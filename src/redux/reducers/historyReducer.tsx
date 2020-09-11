@@ -1,6 +1,6 @@
-import { CREATE_HISTORY, UPDATE_HISTORY, DELETE_HISTORY } from './types';
+import { CREATE_HISTORY, UPDATE_HISTORY, DELETE_HISTORY } from '../types';
 
-export const initialState: any = [];
+const initialState: any = [];
 
 export const historyReducer = (state = initialState, action: any) => {
     switch (action.type) {
@@ -8,10 +8,10 @@ export const historyReducer = (state = initialState, action: any) => {
             return action.history;
         case UPDATE_HISTORY:
             let history = [...state];
-            if(history.length === 10) {
-                history.pop();
-            }
             let newHistory = history.filter((item: any) => item !== action.history);
+            if(newHistory.length === 10) {
+                newHistory.pop();
+            }
             newHistory.unshift(action.history);
             localStorage.setItem("history", JSON.stringify(newHistory));
             return newHistory;

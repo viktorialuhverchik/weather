@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { SELECT_CITY, UPDATE_HISTORY } from '../../redux/types';
+import { setCityName, updateHistory } from '../../redux/actions/actions';
 
 import './PlacesAutoComplete.css';
 
-const PlacesAutoComplete = (props: any) => {
+const PlacesAutoComplete = () => {
+
+    const dispatch = useDispatch();
 
     const [selectedCity, setSelectedCity] = useState({
         label: '',
@@ -20,7 +22,8 @@ const PlacesAutoComplete = (props: any) => {
                     selectedCity,
                     onChange: (city: any) => {
                         setSelectedCity(city);
-                        props.setCityName(city)
+                        dispatch(setCityName(city));
+                        dispatch(updateHistory(city));
                     }
                 }}
             />
@@ -28,20 +31,4 @@ const PlacesAutoComplete = (props: any) => {
     )
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        setCityName: (city: any) => {
-            const cityName = city.label.split(',')[0];
-            dispatch({
-                type: SELECT_CITY,
-                name: cityName
-            });
-            dispatch({
-                type: UPDATE_HISTORY,
-                history: cityName
-            });
-        }
-    }
-};
-
-export default connect(null, mapDispatchToProps)(PlacesAutoComplete);
+export default connect()(PlacesAutoComplete);

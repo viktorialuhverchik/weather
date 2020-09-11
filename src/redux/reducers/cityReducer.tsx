@@ -1,6 +1,6 @@
-import { SELECT_CITY } from './types';
+import { SELECT_CITY } from '../types';
 
-export const initialState = {
+const initialState = {
     name: "London"
 };
 

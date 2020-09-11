@@ -1,41 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Card } from '@material-ui/core';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { Card, CircularProgress } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { getCurrentWeather } from '../../services/services';
+import { getCurrentWeather } from '../../redux/actions/actions';
 
 import './CurrentWeather.css';
 
 
-const CurrentWeather = (props: any) => {
+const CurrentWeather = () => {
+
+    const dispatch = useDispatch();
+    const city = useSelector((state: any) => state.city.name);
+    const currentWeather = useSelector((state: any) => state.weather.currentWeather);
+    const loading = useSelector((state: any) => state.loading);
 
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
     let today  = new Date();
     let formattedDate = today.toLocaleDateString("en-US", options);
 
-
-    const [currentWeather, setCurrentWeather] = useState({
-        main: {temp: 0, feels_like: "", temp_min: "", temp_max: "", pressure: "", humidity: ""},
-        weather: [{id: "", main: "", description: "", icon: ""}],
-    });
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let weather = await getCurrentWeather(props.city.name);
-                setCurrentWeather(weather);
-            } catch(error) {
-                console.log(error);
-            }
-        };
+        try {
+            dispatch(getCurrentWeather(city));
+        } catch(error) {
+            console.log(error);
+        }
+    }, [city]);
 
-        fetchData();
-
-    }, [props.city]);
+    if (loading) {
+        return <CircularProgress/>
+    };
 
     return (
         <div className="card-container">
-            <h3>Today weather in {props.city.name}</h3>
+            <h3>Today weather in {city}</h3>
             <Card className="today-weather_card">
                 <h4 className="today-date">{formattedDate}</h4> 
                 <h4>{!currentWeather.main ? <Alert severity="error">This is an error — check your city!</Alert> : (currentWeather.main.temp-273.15).toFixed(0)}&#176;C</h4>
@@ -48,10 +45,4 @@ const CurrentWeather = (props: any) => {
     )
 };
 
-const mapStateToProps = (state: any) => {
-    return {
-        city: state.city
-    };
-};
-
-export default connect(mapStateToProps)(CurrentWeather);
+export default connect()(CurrentWeather);
