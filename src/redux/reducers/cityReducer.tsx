@@ -1,6 +1,6 @@
 import { SELECT_CITY } from '../types';
 
-const initialState = {
+const initialState: any = {
     name: "London"
 };
 

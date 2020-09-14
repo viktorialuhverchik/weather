@@ -1,14 +1,14 @@
-import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Grid} from '@material-ui/core';
 import { updateCity, deleteHistory } from '../../redux/actions/actions';
 
 import './History.css';
 
-const History = () => {
+const History: FC = () => {
 
-const dispatch = useDispatch();
-const history = useSelector((state: any) => state.history);
+    const dispatch = useDispatch();
+    const history = useSelector((state: any) => state.history);
 
     return (
         <div className= "history-card_wrapper">
@@ -32,4 +32,4 @@ const history = useSelector((state: any) => state.history);
     );
 }
 
-export default connect()(History);
+export default History;

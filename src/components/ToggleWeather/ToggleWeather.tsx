@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import './ToggleWeather.css';
 
-const ToggleWeather = () => {
+const ToggleWeather: FC = () => {
     
     return (
         <div className="toggle-weather_container ">

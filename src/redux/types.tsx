@@ -6,7 +6,9 @@ export const CURRENT_WEATHER = "CURRENT_WEATHER";
 export const FIVE_DAYS_WEATHER = "FIVE_DAYS_WEATHER";
 export const SHOW_LOADER = "SHOW_LOADER";
 export const HIDE_LOADER = "HIDE_LOADER";
-export const SHOW_ALERT = "SHOW_ALERT";
-export const HIDE_ALERT = "HIDE_ALERT";
 
-
+export enum Options {
+    year = 'numeric',
+    month = 'long',
+    day = 'numeric'
+};

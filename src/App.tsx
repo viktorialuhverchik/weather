@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Route, Switch } from "react-router-dom";
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Container, Grid } from '@material-ui/core';
 import Header from './components/Header/Header';
 import PlacesAutoComplete from './components/PlacesAutoComplete/PlacesAutoComplete';
@@ -14,7 +14,7 @@ import './App.css';
 
 require('dotenv').config();
 
-const App = () => {
+const App: FC = () => {
 
     const dispatch = useDispatch();
 
@@ -49,4 +49,4 @@ const App = () => {
     );
 };
 
-export default connect()(App);
+export default App;

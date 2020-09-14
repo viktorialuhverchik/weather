@@ -1,6 +1,6 @@
 import { CURRENT_WEATHER, FIVE_DAYS_WEATHER } from '../types';
 
-const initialState = {
+const initialState: any = {
     currentWeather: {},
     fiveDaysWeather: {}
 };
@@ -12,7 +12,10 @@ export const weatherReducer = (state = initialState, action: any) => {
         case FIVE_DAYS_WEATHER:
             let weather: any = action.payload;
             let weatherDictionary: any = {};
-                weather.list.forEach((item: any) => {
+            if (!weather.list) {
+                return {...state, fiveDaysWeather: {}};
+            }
+            weather.list.forEach((item: any) => {
                 let date = new Date(item.dt*1000).getDate();
                 weatherDictionary[date] = item;
             })

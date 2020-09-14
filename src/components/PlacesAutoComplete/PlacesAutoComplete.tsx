@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { setCityName, updateHistory } from '../../redux/actions/actions';
 
 import './PlacesAutoComplete.css';
 
-const PlacesAutoComplete = () => {
+const PlacesAutoComplete: FC = () => {
 
     const dispatch = useDispatch();
 
@@ -31,4 +31,4 @@ const PlacesAutoComplete = () => {
     )
 };
 
-export default connect()(PlacesAutoComplete);
+export default PlacesAutoComplete;

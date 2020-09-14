@@ -1,8 +1,7 @@
-import { SHOW_LOADER, HIDE_LOADER, SHOW_ALERT, HIDE_ALERT } from '../types';
+import { SHOW_LOADER, HIDE_LOADER } from '../types';
 
-const initialState = {
-    loading: false,
-    alert: null
+const initialState: any = {
+    loading: false
 };
 
 export const appReducer = (state = initialState, action: any) => {
@@ -11,10 +10,6 @@ export const appReducer = (state = initialState, action: any) => {
             return { ...state, loading: true };
         case HIDE_LOADER:
             return { ...state, loading: false };
-        case SHOW_ALERT:
-            return { ...state, alert: false };
-        case HIDE_ALERT:
-            return { ...state, alert: false };
         default: 
             return state;
     }
