@@ -19,7 +19,14 @@ const CurrentWeather: FC = () => {
     let formattedDate: string = today.toLocaleDateString("en-US", Options);
 
     useEffect(() => {
-        dispatch(getCurrentWeather(city));
+        const fetchData = async () => {
+            try {
+                await dispatch(getCurrentWeather(city));
+            } catch(error) {
+                console.log(error);
+            }
+        };
+        fetchData();
     }, [city, dispatch]);
 
     if (loading) {

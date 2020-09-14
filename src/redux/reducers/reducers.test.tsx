@@ -65,4 +65,3 @@ describe('city reducer', () => {
             .toEqual({name: 'Paris'});
     });
 });
-

@@ -1,8 +1,6 @@
 import React from 'react';
 import ToggleWeather from './ToggleWeather';
 import { renderWithRedux } from '../../index.test';
-import { Link } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 import '@testing-library/jest-dom/extend-expect'
 

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PlacesAutoComplete from './PlacesAutoComplete';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { renderWithRedux } from '../../index.test';
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'
 
 describe('PlacesAutoComplete component', () => {

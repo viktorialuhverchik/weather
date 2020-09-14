@@ -15,7 +15,15 @@ const FiveDaysWeather: FC = () => {
     const loading: any = useSelector((state: any) => state.app.loading);
 
     useEffect(() => {
-        dispatch(getFiveDaysWeather(city));
+        const fetchData = async () => {
+            try {
+                await dispatch(getFiveDaysWeather(city));
+            } catch(error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
     }, [city, dispatch]);
 
     if (loading) {

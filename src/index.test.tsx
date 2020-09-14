@@ -7,8 +7,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { render as rtlRender } from '@testing-library/react';
 import '@testing-library/dom';
 
-const store = createStore(rootReducer);
-
 function renderWithRedux(
     component: any,
     {
@@ -16,8 +14,12 @@ function renderWithRedux(
         ...renderOptions
     } = {}
 ) {
-      function Wrapper({ children }: any) {
-          return <Provider store={store}><Router>{children}</Router></Provider>
+    function Wrapper({ children }: any) {
+        return (
+            <Provider store={store}>
+                <Router>{children}</Router>
+            </Provider>
+        );
       };
     return rtlRender(component, { wrapper: Wrapper, ...renderOptions })
 };

@@ -48,37 +48,27 @@ export function deleteHistory(city: any) {
 
 export function getCurrentWeather(city: any) {
     return async (dispatch: any) => {
-        try {
-            dispatch(showLoader());
-            const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
-            const json = await response.json();
-            dispatch({
-                type: CURRENT_WEATHER,
-                payload: json
-            });
-            dispatch(hideLoader());
-        }
-        catch(error) {
-            console.log(error);
-        }
+        dispatch(showLoader());
+        const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
+        const json = await response.json();
+        dispatch({
+            type: CURRENT_WEATHER,
+            payload: json
+        });
+        dispatch(hideLoader());
     };
 };
 
 export function getFiveDaysWeather(city: any) {
     return async (dispatch: any) => {
-        try {
-            dispatch(showLoader());
-            const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/forecast?q=${city}&appid=${process.env.REACT_APP_API_KEY}`)
-            const json = await response.json();
-            dispatch({
-                type: FIVE_DAYS_WEATHER, 
-                payload: json
-            });
-            dispatch(hideLoader());
-        }
-        catch(error) {
-            console.log(error);
-        }
+        dispatch(showLoader());
+        const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/forecast?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
+        const json = await response.json();
+        dispatch({
+            type: FIVE_DAYS_WEATHER, 
+            payload: json
+        });
+        dispatch(hideLoader());
     };
 };
 
