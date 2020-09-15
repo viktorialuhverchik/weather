@@ -22,5 +22,5 @@ export const weatherReducer = (state = initialState, action: any) => {
             return { ...state, fiveDaysWeather: weatherDictionary };
         default: 
             return state;
-    }
+    };
 };

@@ -1,5 +1,6 @@
 import * as actions from '../actions/actions';
 import * as types from '../types';
+import 'jest-fetch-mock';
 
 describe('actions', () => {
     it('should create an action setCityName', () => {

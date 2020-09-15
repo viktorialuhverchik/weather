@@ -6,6 +6,10 @@ import '@testing-library/jest-dom/extend-expect';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import React from 'react';
+import fetch from 'node-fetch';
+
+// global.fetch = fetch;
+
 
 Enzyme.configure({ adapter: new Adapter() });
 
