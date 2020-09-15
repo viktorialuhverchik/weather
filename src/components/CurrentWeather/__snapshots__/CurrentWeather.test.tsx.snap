@@ -13,7 +13,9 @@ Object {
       <div
         class="card-container"
       >
-        <h3>
+        <h3
+          data-testid="city"
+        >
           Today weather in 
           London
         </h3>
@@ -49,7 +51,9 @@ Object {
           <div
             class="today-weather_info"
           >
-            <h6 />
+            <h6
+              data-testid="weather"
+            />
           </div>
         </div>
       </div>
@@ -59,7 +63,9 @@ Object {
     <div
       class="card-container"
     >
-      <h3>
+      <h3
+        data-testid="city"
+      >
         Today weather in 
         London
       </h3>
@@ -95,7 +101,9 @@ Object {
         <div
           class="today-weather_info"
         >
-          <h6 />
+          <h6
+            data-testid="weather"
+          />
         </div>
       </div>
     </div>

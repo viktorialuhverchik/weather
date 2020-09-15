@@ -35,7 +35,7 @@ const CurrentWeather: FC = () => {
 
     return (
         <div className="card-container">
-            <h3>Today weather in {city}</h3>
+            <h3 data-testid="city">Today weather in {city}</h3>
             <Card className="today-weather_card">
                 {!currentWeather.main ? <Alert severity="error">Weather in {city} not found!</Alert> : 
                     <>
@@ -43,8 +43,7 @@ const CurrentWeather: FC = () => {
                         <h4>{(currentWeather.main.temp-273.15).toFixed(0)}&#176;C</h4>
                     </>}
                 <div className="today-weather_info">
-                    <h6>{!currentWeather.weather ? "" : currentWeather.weather[0].main}</h6>
-                    {/* <img src={`/images/weather/${currentWeather.weather[0].main}.png`} width="50" height="50" className="today-weather_image"></img> */}
+                    <h6 data-testid="weather">{!currentWeather.weather ? "" : currentWeather.weather[0].main}</h6>
                 </div>
             </Card>
         </div>

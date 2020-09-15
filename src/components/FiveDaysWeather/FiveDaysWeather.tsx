@@ -38,8 +38,8 @@ const FiveDaysWeather: FC = () => {
                     return (
                         <div className="day-weather_container" key={index}>
                             <Card className="day-weather_card">
-                                <h5>{new Date(item.dt*1000).toLocaleDateString("en-US", Options)}</h5>
-                                <h4>{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h4>
+                                <h5 data-testid="date">{new Date(item.dt*1000).toLocaleDateString("en-US", Options)}</h5>
+                                <h4 data-testid="temp">{!item.main.temp ? "" : (item.main.temp-273.15).toFixed(0)}&#176;C</h4>
                                 <h6>{item.weather[0].main}</h6>
                             </Card>
                         </div>

@@ -9,7 +9,7 @@ import {
     HIDE_LOADER
 } from '../types';
 
-export function setCityName(city: any) {
+export const setCityName = (city: any) => {
     const cityName = city.label.split(',')[0];
     return {
         type: SELECT_CITY,
@@ -17,21 +17,21 @@ export function setCityName(city: any) {
     };
 };
 
-export function updateCity(city: string) {
+export const updateCity = (city: string) => {
     return {
         type: SELECT_CITY,
         name: city
     };
 };
 
-export function createHistory(history: any) {
+export const createHistory = (history: any) => {
     return {
         type: CREATE_HISTORY,
         history
     };
 };
 
-export function updateHistory(city: any) {
+export const updateHistory = (city: any) => {
     const cityName = city.label.split(',')[0];
     return {
         type: UPDATE_HISTORY,
@@ -39,14 +39,14 @@ export function updateHistory(city: any) {
     };
 };
 
-export function deleteHistory(city: string) {
+export const deleteHistory = (city: string) => {
     return {
         type: DELETE_HISTORY,
         history: city
     };
 };
 
-export function getCurrentWeather(city: string) {
+export const getCurrentWeather = (city: string) => {
     return async (dispatch: any) => {
         dispatch(showLoader());
         const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
@@ -59,7 +59,7 @@ export function getCurrentWeather(city: string) {
     };
 };
 
-export function getFiveDaysWeather(city: string) {
+export const getFiveDaysWeather = (city: string) => {
     return async (dispatch: any) => {
         dispatch(showLoader());
         const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/forecast?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
@@ -72,13 +72,13 @@ export function getFiveDaysWeather(city: string) {
     };
 };
 
-export function showLoader() {
+export const showLoader = () => {
     return {
         type: SHOW_LOADER
     };
 };
 
-export function hideLoader() {
+export const hideLoader = () => {
     return {
         type: HIDE_LOADER
     };
