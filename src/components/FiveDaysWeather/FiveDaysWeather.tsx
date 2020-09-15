@@ -10,9 +10,9 @@ import './FiveDaysWeather.css';
 const FiveDaysWeather: FC = () => {
 
     const dispatch = useDispatch();
-    const city: any = useSelector((state: any) => state.city.name);
+    const city: string = useSelector((state: any) => state.city.name);
     const fiveDaysWeather: any = useSelector((state: any) => state.weather.fiveDaysWeather);
-    const loading: any = useSelector((state: any) => state.app.loading);
+    const loading: boolean = useSelector((state: any) => state.app.loading);
 
     useEffect(() => {
         const fetchData = async () => {

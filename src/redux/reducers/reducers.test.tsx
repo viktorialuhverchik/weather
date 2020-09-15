@@ -1,5 +1,6 @@
 import { historyReducer } from './historyReducer';
 import { cityReducer} from './cityReducer';
+import { weatherReducer} from './weatherReducer';
 
 describe('history reducer', () => {
     it('should return the initial state', () => {
@@ -58,10 +59,17 @@ describe('city reducer', () => {
         expect(cityReducer(
             undefined, 
             {
-            type: 'SELECT_CITY',
-            name: 'Paris'
+                type: 'SELECT_CITY',
+                name: 'Paris'
             }
             ))
             .toEqual({name: 'Paris'});
     });
+});
+
+describe('weather reducer', () => {
+    it('should return the initial state', () => {
+        expect(weatherReducer(undefined, {})).toEqual({currentWeather: {}, fiveDaysWeather: {}});
+    });
+
 });

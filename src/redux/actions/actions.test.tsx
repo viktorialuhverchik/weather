@@ -1,7 +1,5 @@
 import * as actions from '../actions/actions';
 import * as types from '../types';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 
 describe('actions', () => {
     it('should create an action setCityName', () => {
@@ -33,6 +31,42 @@ describe('actions', () => {
             history
         };
         expect(actions.createHistory(history)).toEqual(expectedAction);
+    });
+
+    it('should create an action updateHistory', () => {
+        const city = {
+            label: "London, Великобритания",
+            value: "London"
+        };
+        const cityName = city.label.split(',')[0];
+        const expectedAction = {
+            type: types.UPDATE_HISTORY,
+            history: cityName
+        };
+        expect(actions.updateHistory(city)).toEqual(expectedAction);
+    });
+
+    it('should create an action deleteHistory', () => {
+        const city = "London";
+        const expectedAction = {
+            type: types.DELETE_HISTORY,
+            history: city
+        };
+        expect(actions.deleteHistory(city)).toEqual(expectedAction);
+    });
+
+    it('should create an action showLoader', () => {
+        const expectedAction = {
+            type: types.SHOW_LOADER
+        };
+        expect(actions.showLoader()).toEqual(expectedAction);
+    });
+
+    it('should create an action hideLoader', () => {
+        const expectedAction = {
+            type: types.HIDE_LOADER
+        };
+        expect(actions.hideLoader()).toEqual(expectedAction);
     });
 });
 

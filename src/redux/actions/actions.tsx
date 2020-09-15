@@ -17,7 +17,7 @@ export function setCityName(city: any) {
     };
 };
 
-export function updateCity(city: any) {
+export function updateCity(city: string) {
     return {
         type: SELECT_CITY,
         name: city
@@ -27,7 +27,7 @@ export function updateCity(city: any) {
 export function createHistory(history: any) {
     return {
         type: CREATE_HISTORY,
-        history: history
+        history
     };
 };
 
@@ -39,14 +39,14 @@ export function updateHistory(city: any) {
     };
 };
 
-export function deleteHistory(city: any) {
+export function deleteHistory(city: string) {
     return {
         type: DELETE_HISTORY,
         history: city
     };
 };
 
-export function getCurrentWeather(city: any) {
+export function getCurrentWeather(city: string) {
     return async (dispatch: any) => {
         dispatch(showLoader());
         const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
@@ -59,7 +59,7 @@ export function getCurrentWeather(city: any) {
     };
 };
 
-export function getFiveDaysWeather(city: any) {
+export function getFiveDaysWeather(city: string) {
     return async (dispatch: any) => {
         dispatch(showLoader());
         const response = await fetch(`${process.env.REACT_APP_BASE_API}/${process.env.REACT_APP_API_VERSION}/forecast?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);

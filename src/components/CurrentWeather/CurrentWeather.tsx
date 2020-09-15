@@ -11,9 +11,9 @@ import './CurrentWeather.css';
 const CurrentWeather: FC = () => {
 
     const dispatch = useDispatch();
-    const city: any = useSelector((state: any) => state.city.name);
+    const city: string = useSelector((state: any) => state.city.name);
     const currentWeather: any = useSelector((state: any) => state.weather.currentWeather);
-    const loading: any = useSelector((state: any) => state.app.loading);
+    const loading: boolean = useSelector((state: any) => state.app.loading);
 
     let today: Date = new Date();
     let formattedDate: string = today.toLocaleDateString("en-US", Options);

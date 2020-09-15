@@ -8,7 +8,7 @@ import './History.css';
 const History: FC = () => {
 
     const dispatch = useDispatch();
-    const history = useSelector((state: any) => state.history);
+    const history: any = useSelector((state: any) => state.history);
 
     return (
         <div className= "history-card_wrapper">
