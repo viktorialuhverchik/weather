@@ -1,9 +1,8 @@
 import * as actions from '../actions/actions';
 import * as types from '../types';
-// import configureMockStore from 'redux-mock-store';
-// import thunk from 'redux-thunk';
-// import fetchMock from 'jest-fetch-mock';
-// import { shallow } from 'enzyme';
+import { currentWeather } from '../../components/fakeData';
+import { createStore } from 'redux';
+import { rootReducer } from '../reducers/rootReducer';
 
 describe('actions', () => {
     it('should create an action setCityName', () => {
@@ -74,23 +73,30 @@ describe('actions', () => {
     });
 });
 
-// const middlewares = [thunk];
-// const mockStore = configureMockStore(middlewares);
+describe('async actions', () => {
 
-// describe('async actions', () => {
-//     afterEach(() => {
-//         fetchMock.restore();
-//     });
+    it('should create an action getCurrentWeather', async () => {
 
-//     it('should create an action getCurrentWeather', () => {
-//         // fetchMock.onGet('/').reply(200, { response: {"coord":{"lon":-0.13,"lat":51.51},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"stations","main":{"temp":300.04,"feels_like":301.21,"temp_min":298.15,"temp_max":302.04,"pressure":1017,"humidity":57},"visibility":10000,"wind":{"speed":2.1,"deg":90},"clouds":{"all":71},"dt":1600170140,"sys":{"type":1,"id":1414,"country":"GB","sunrise":1600148161,"sunset":1600193728},"timezone":3600,"id":2643743,"name":"London","cod":200} });
-//         const store = mockStore({ currentWeather: {} });
-//         const expectedActions = { type: types.CURRENT_WEATHER, payload: {"coord":{"lon":-0.13,"lat":51.51},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"stations","main":{"temp":300.04,"feels_like":301.21,"temp_min":298.15,"temp_max":302.04,"pressure":1017,"humidity":57},"visibility":10000,"wind":{"speed":2.1,"deg":90},"clouds":{"all":71},"dt":1600170140,"sys":{"type":1,"id":1414,"country":"GB","sunrise":1600148161,"sunset":1600193728},"timezone":3600,"id":2643743,"name":"London","cod":200} };
-//         const city = "London";
-//         store.dispatch(actions.getCurrentWeather(city)).then(() => {
-//         expect(store.getActions).toEqual(expectedActions);
-//         })
-//     });
-// });
+        const getWeather = jest.fn();
+        getWeather.mockImplementation(() => {
+            return currentWeather;
+        });
+
+        await expect(getWeather()).toEqual(currentWeather);
+
+        const makeTestStore = (options={}) => {
+            const store = createStore(rootReducer, options);
+            const origDispatch = store.dispatch;
+            store.dispatch = jest.fn(origDispatch);
+            return store;
+        };
+
+        const store = makeTestStore({ weather: { currentWeather: {} } });
+        const expectedActions = { type: types.CURRENT_WEATHER, payload: currentWeather};
+        // await store.dispatch(getWeather()).then(() => {
+        //     expect(store.getActions()).toEqual(expectedActions);
+        // });
+    });
+});
 
 
