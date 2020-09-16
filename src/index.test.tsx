@@ -1,16 +1,24 @@
 import React from 'react';
 import App from './App';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { rootReducer } from './redux/reducers/rootReducer';
 import { BrowserRouter as Router } from "react-router-dom";
 import { render as rtlRender } from '@testing-library/react';
 import '@testing-library/dom';
+import thunk from 'redux-thunk';
+
+export const makeTestStore = () => {
+    const store = createStore(rootReducer, applyMiddleware(thunk));
+    const origDispatch = store.dispatch;
+    store.dispatch = jest.fn(origDispatch);
+    return store;
+};
 
 function renderWithRedux(
     component: any,
     {
-        store = createStore(rootReducer),
+        store = makeTestStore(),
         ...renderOptions
     } = {}
 ) {

@@ -14,11 +14,11 @@ const History: FC = () => {
         <div className= "history-card_wrapper">
             <h3>History</h3>
             <Card className= "history-card">
-                {history.map((item: any, index: number) => {
+                {history.map((item: string, index: number) => {
                     return (
                         <Grid container spacing={2} key={index}>
                             <Grid item xs={10} onClick={()=> {dispatch(updateCity(item))}} className="history-city">
-                                <h6>{item}</h6>
+                                <h6 data-testid="history">{item}</h6>
                             </Grid>
                             <Grid item xs={2} className="history-icon">
                                 <i className="fa fa-trash" aria-hidden="true" onClick={() => {dispatch(deleteHistory(item))}}></i>

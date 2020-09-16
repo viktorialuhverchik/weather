@@ -3,6 +3,7 @@ import * as types from '../types';
 import { currentWeather } from '../../components/fakeData';
 import { createStore } from 'redux';
 import { rootReducer } from '../reducers/rootReducer';
+import { makeTestStore } from '../../index.test';
 
 describe('actions', () => {
     it('should create an action setCityName', () => {
@@ -84,14 +85,7 @@ describe('async actions', () => {
 
         await expect(getWeather()).toEqual(currentWeather);
 
-        const makeTestStore = (options={}) => {
-            const store = createStore(rootReducer, options);
-            const origDispatch = store.dispatch;
-            store.dispatch = jest.fn(origDispatch);
-            return store;
-        };
-
-        const store = makeTestStore({ weather: { currentWeather: {} } });
+        const store = makeTestStore();
         const expectedActions = { type: types.CURRENT_WEATHER, payload: currentWeather};
         // await store.dispatch(getWeather()).then(() => {
         //     expect(store.getActions()).toEqual(expectedActions);

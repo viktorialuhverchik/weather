@@ -5,7 +5,7 @@ import { wait } from "@testing-library/react";
 import { fiveDaysWeather } from '../fakeData';
 
 
-describe('FiveDaysWeather component',() => {
+describe('FiveDaysWeather component', () => {
     it('renders FiveDaysWeather component', () => {
       const wrapper = renderWithRedux(<FiveDaysWeather/>);
       expect(wrapper).toMatchSnapshot();
