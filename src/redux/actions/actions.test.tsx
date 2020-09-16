@@ -1,9 +1,6 @@
 import * as actions from '../actions/actions';
 import * as types from '../types';
-import { currentWeather } from '../../components/fakeData';
-import { createStore } from 'redux';
-import { rootReducer } from '../reducers/rootReducer';
-import { makeTestStore } from '../../index.test';
+import { currentWeather, fiveDaysWeather } from '../../components/fakeData';
 
 describe('actions', () => {
     it('should create an action setCityName', () => {
@@ -76,20 +73,24 @@ describe('actions', () => {
 
 describe('async actions', () => {
 
-    it('should create an action getCurrentWeather', async () => {
+    beforeEach(() => {
+        fetchMock.resetMocks();
+    });
 
+    it('should create an action getCurrentWeather', async () => {
         const getWeather = jest.fn();
         getWeather.mockImplementation(() => {
             return currentWeather;
         });
-
         await expect(getWeather()).toEqual(currentWeather);
+    });
 
-        const store = makeTestStore();
-        const expectedActions = { type: types.CURRENT_WEATHER, payload: currentWeather};
-        // await store.dispatch(getWeather()).then(() => {
-        //     expect(store.getActions()).toEqual(expectedActions);
-        // });
+    it('should create an action getFiveDaysWeather', async () => {
+        const getWeather = jest.fn();
+        getWeather.mockImplementation(() => {
+            return fiveDaysWeather;
+        });
+        await expect(getWeather()).toEqual(fiveDaysWeather);
     });
 });
 

@@ -4,8 +4,6 @@ import { renderWithRedux } from '../../index.test';
 import { wait } from "@testing-library/react";
 import { currentWeather } from '../fakeData';
 
-global.fetch = require('jest-fetch-mock');
-
 describe('CurrentWeather component',() => {
 
     beforeEach(() => {
@@ -17,7 +15,7 @@ describe('CurrentWeather component',() => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('get weather', async () => {
+    it('get current weather', async () => {
         fetchMock.mockResponseOnce(JSON.stringify(currentWeather));
         const getWeather = jest.fn();
         getWeather.mockImplementation(() => {

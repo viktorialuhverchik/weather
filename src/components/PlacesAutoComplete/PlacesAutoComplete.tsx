@@ -19,6 +19,7 @@ const PlacesAutoComplete: FC = () => {
     return (
         <div className="app-select_city">
             <GooglePlacesAutocomplete
+                data-testid="autocomplete"
                 apiKey='AIzaSyCVTVRvhts70T-KlhGw14mejDBAVFTlb7w'
                 selectProps={{
                     selectedCity,

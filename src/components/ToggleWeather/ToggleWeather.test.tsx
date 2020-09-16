@@ -15,5 +15,4 @@ describe('ToggleWeather component',() => {
         const wrapper = shallow(<ToggleWeather/>);
         expect(wrapper.find('Link').length).toBe(2);
     });
-
 });
