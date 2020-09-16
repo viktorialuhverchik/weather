@@ -1,8 +1,10 @@
 import { historyReducer } from './historyReducer';
 import { cityReducer} from './cityReducer';
 import { weatherReducer} from './weatherReducer';
+import { appReducer } from './appReducer';
 
 describe('history reducer', () => {
+
     it('should return the initial state', () => {
         expect(historyReducer(undefined, {})).toEqual([]);
     });
@@ -51,6 +53,7 @@ describe('history reducer', () => {
 });
 
 describe('city reducer', () => {
+
     it('should return the initial state', () => {
         expect(cityReducer(undefined, {})).toEqual({name: 'London'});
     });
@@ -68,8 +71,38 @@ describe('city reducer', () => {
 });
 
 describe('weather reducer', () => {
+
     it('should return the initial state', () => {
         expect(weatherReducer(undefined, {})).toEqual({currentWeather: {}, fiveDaysWeather: {}});
     });
 
+});
+
+describe('app reducer', () => {
+
+    it('should return the initial state', () => {
+        expect(appReducer(undefined, {})).toEqual({loading: false});
+    });
+
+    it('should handle SHOW_LOADER', () => {
+        expect(appReducer(
+            false, 
+            {
+                type: 'SHOW_LOADER',
+                loading: true
+            }
+            ))
+            .toEqual({loading: true});
+    });
+
+    it('should handle HIDE_LOADER', () => {
+        expect(appReducer(
+            true, 
+            {
+                type: 'HIDE_LOADER',
+                loading: false
+            }
+            ))
+            .toEqual({loading: false});
+    });
 });
