@@ -12,4 +12,5 @@ const ToggleWeather: FC = () => {
         </div>
     );
 };
+
 export default ToggleWeather;

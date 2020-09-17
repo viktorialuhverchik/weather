@@ -30,4 +30,14 @@ describe('FiveDaysWeather component', () => {
         await wait(() => expect(getAllByTestId("image")).toBeTruthy());
     });
 
+    it('get alert', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify({}));
+        const getWeather = jest.fn();
+        getWeather.mockImplementation(() => {
+            return {};
+        });
+        const { findByRole } = await renderWithRedux(<FiveDaysWeather />);
+        await wait(() => expect(findByRole("alert")).toBeTruthy());
+    });
+
 });

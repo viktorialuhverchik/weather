@@ -18,54 +18,7 @@ Object {
         </h3>
         <div
           class="MuiPaper-root MuiCard-root history-card MuiPaper-elevation1 MuiPaper-rounded"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
-          >
-            <div
-              class="MuiGrid-root history-city MuiGrid-item MuiGrid-grid-xs-10"
-              data-testid="history-city"
-            >
-              <h6
-                data-testid="city"
-              >
-                London
-              </h6>
-            </div>
-            <div
-              class="MuiGrid-root history-icon MuiGrid-item MuiGrid-grid-xs-2"
-            >
-              <i
-                aria-hidden="true"
-                class="fa fa-trash"
-                data-testid="trash"
-              />
-            </div>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
-          >
-            <div
-              class="MuiGrid-root history-city MuiGrid-item MuiGrid-grid-xs-10"
-              data-testid="history-city"
-            >
-              <h6
-                data-testid="city"
-              >
-                Paris
-              </h6>
-            </div>
-            <div
-              class="MuiGrid-root history-icon MuiGrid-item MuiGrid-grid-xs-2"
-            >
-              <i
-                aria-hidden="true"
-                class="fa fa-trash"
-                data-testid="trash"
-              />
-            </div>
-          </div>
-        </div>
+        />
       </div>
     </div>
   </body>,
@@ -78,54 +31,7 @@ Object {
       </h3>
       <div
         class="MuiPaper-root MuiCard-root history-card MuiPaper-elevation1 MuiPaper-rounded"
-      >
-        <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
-        >
-          <div
-            class="MuiGrid-root history-city MuiGrid-item MuiGrid-grid-xs-10"
-            data-testid="history-city"
-          >
-            <h6
-              data-testid="city"
-            >
-              London
-            </h6>
-          </div>
-          <div
-            class="MuiGrid-root history-icon MuiGrid-item MuiGrid-grid-xs-2"
-          >
-            <i
-              aria-hidden="true"
-              class="fa fa-trash"
-              data-testid="trash"
-            />
-          </div>
-        </div>
-        <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
-        >
-          <div
-            class="MuiGrid-root history-city MuiGrid-item MuiGrid-grid-xs-10"
-            data-testid="history-city"
-          >
-            <h6
-              data-testid="city"
-            >
-              Paris
-            </h6>
-          </div>
-          <div
-            class="MuiGrid-root history-icon MuiGrid-item MuiGrid-grid-xs-2"
-          >
-            <i
-              aria-hidden="true"
-              class="fa fa-trash"
-              data-testid="trash"
-            />
-          </div>
-        </div>
-      </div>
+      />
     </div>
   </div>,
   "debug": [Function],

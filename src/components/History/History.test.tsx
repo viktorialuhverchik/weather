@@ -1,8 +1,8 @@
 import React from 'react';
 import History from './History';
 import { renderWithRedux } from '../../index.test';
-import { updateCity, deleteHistory } from '../../redux/actions/actions';
-import { DELETE_HISTORY, SELECT_CITY } from '../../redux/types';
+import { updateCity, deleteHistory, createHistory } from '../../redux/actions/actions';
+import { CREATE_HISTORY, DELETE_HISTORY, SELECT_CITY } from '../../redux/types';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { history } from '../fakeData';
@@ -13,9 +13,6 @@ import { shallow } from 'enzyme';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const spy = jest.spyOn(redux, 'useSelector');
-spy.mockReturnValue(history);
-
 describe('History component',() => {
 
     let store: any;
@@ -23,6 +20,10 @@ describe('History component',() => {
     beforeEach(() => {
         store = mockStore();
         fetchMock.resetMocks();
+    });
+
+    afterEach(() => {
+        fetchMock.mockClear();
     });
 
     it('renders History component', () => {
@@ -45,6 +46,8 @@ describe('History component',() => {
     });
 
     it("should render a history", () => {
+        const spy = jest.spyOn(redux, 'useSelector');
+        spy.mockReturnValue(history);
         const { getAllByTestId } = renderWithRedux(<History />);
         expect(getAllByTestId("city")).toBeTruthy();
     });
@@ -53,13 +56,21 @@ describe('History component',() => {
         const mockCallBack = jest.fn();
         const grid = shallow((<Grid onClick={mockCallBack}></Grid>));
         grid.simulate('click');
-        expect(mockCallBack).toBeCalledTimes(1);
+        expect(mockCallBack.mock.calls.length).toEqual(1);
     });
 
     it('test click event trash', () => {
         const mockCallBack = jest.fn();
         const i = shallow((<i onClick={mockCallBack}></i>));
         i.simulate('click');
-        expect(mockCallBack).toBeCalledTimes(1);
+        expect(mockCallBack.mock.calls.length).toEqual(1);
+    });
+
+    it('should create history', () => {
+        const history = ["London", "Paris"];
+        let result = store.dispatch(createHistory(history));
+        const expectedActions = { type: CREATE_HISTORY, history };
+        expect(expectedActions).toEqual(result);
+        expect(store.getActions()[0]).toEqual(expectedActions);
     });
 });

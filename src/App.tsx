@@ -1,6 +1,5 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Route, Switch } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 import { Container, Grid } from '@material-ui/core';
 import Header from './components/Header/Header';
 import PlacesAutoComplete from './components/PlacesAutoComplete/PlacesAutoComplete';
@@ -8,24 +7,12 @@ import CurrentWeather from './components/CurrentWeather/CurrentWeather';
 import FiveDaysWeather from './components/FiveDaysWeather/FiveDaysWeather';
 import History from './components/History/History';
 import ToggleWeather from './components/ToggleWeather/ToggleWeather';
-import { createHistory } from './redux/actions/actions';
 
 import './App.css';
 
 require('dotenv').config();
 
 const App: FC = () => {
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        let history = localStorage.getItem("history");
-        if(!history) {
-            return;
-        }
-        let formattedHistory = JSON.parse(history);
-        dispatch(createHistory(formattedHistory));
-    }, [dispatch]);
 
     return (
         <div className="App">

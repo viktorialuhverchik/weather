@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Grid} from '@material-ui/core';
-import { updateCity, deleteHistory } from '../../redux/actions/actions';
+import { updateCity, deleteHistory, createHistory } from '../../redux/actions/actions';
 
 import './History.css';
 
@@ -9,6 +9,15 @@ const History: FC = () => {
 
     const dispatch = useDispatch();
     const history: any = useSelector((state: any) => state.history);
+
+    useEffect(() => {
+        let history = localStorage.getItem("history");
+        if(!history) {
+            return;
+        }
+        let formattedHistory = JSON.parse(history);
+        dispatch(createHistory(formattedHistory));
+    }, [dispatch]);
 
     return (
         <div className= "history-card_wrapper">
