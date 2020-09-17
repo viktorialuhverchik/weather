@@ -9,7 +9,7 @@ import './CurrentWeather.css';
 
 
 const CurrentWeather: FC = () => {
-
+    
     const dispatch = useDispatch();
     const city: string = useSelector((state: any) => state.city.name);
     const currentWeather: any = useSelector((state: any) => state.weather.currentWeather);

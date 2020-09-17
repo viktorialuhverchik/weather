@@ -35,13 +35,13 @@ describe('PlacesAutoComplete component', () => {
     });
 
     it('should update history', () => {
-    const city = {
-        label: "London, Великобритания",
-        value: "London"
-    };
-    const cityName = city.label.split(',')[0];
-    let result = store.dispatch(updateHistory(city));
-    const expectedActions = { type: UPDATE_HISTORY, history: cityName};
-    expect(expectedActions).toEqual(result);
+        const city = {
+            label: "London, Великобритания",
+            value: "London"
+        };
+        const cityName = city.label.split(',')[0];
+        let result = store.dispatch(updateHistory(city));
+        const expectedActions = { type: UPDATE_HISTORY, history: cityName};
+        expect(expectedActions).toEqual(result);
     });
 });

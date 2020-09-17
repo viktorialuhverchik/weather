@@ -20,7 +20,7 @@ const PlacesAutoComplete: FC = () => {
         <div className="app-select_city">
             <GooglePlacesAutocomplete
                 data-testid="autocomplete"
-                apiKey='AIzaSyCVTVRvhts70T-KlhGw14mejDBAVFTlb7w'
+                apiKey={`${process.env.REACT_APP_PLACES_AUTOCOMPLETE_KEY}`}
                 selectProps={{
                     selectedCity,
                     onChange: (city: any) => {
