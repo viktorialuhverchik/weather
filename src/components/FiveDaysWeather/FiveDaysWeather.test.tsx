@@ -27,6 +27,7 @@ describe('FiveDaysWeather component', () => {
         const { getAllByTestId } = await renderWithRedux(<FiveDaysWeather />);
         await wait(() => expect(getAllByTestId("date")).toBeTruthy());
         await wait(() => expect(getAllByTestId("temp")).toBeTruthy());
+        await wait(() => expect(getAllByTestId("image")).toBeTruthy());
     });
 
 });

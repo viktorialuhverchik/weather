@@ -18,9 +18,7 @@ describe('CurrentWeather component',() => {
     it('get current weather', async () => {
         fetchMock.mockResponseOnce(JSON.stringify(currentWeather));
         const getWeather = jest.fn();
-        getWeather.mockImplementation(() => {
-            return currentWeather;
-        });
+        getWeather.mockImplementation(() => currentWeather);
         await expect(getWeather()).toEqual(currentWeather);
         await expect(getWeather).toBeCalledTimes(1);
 

@@ -42,9 +42,8 @@ const CurrentWeather: FC = () => {
                         <h4 className="today-date">{formattedDate}</h4>
                         <h4>{(currentWeather.main.temp-273.15).toFixed(0)}&#176;C</h4>
                     </>}
-                <div className="today-weather_info">
+                    <img src={!currentWeather.weather ? "" : `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
                     <h6 data-testid="weather">{!currentWeather.weather ? "" : currentWeather.weather[0].main}</h6>
-                </div>
             </Card>
         </div>
     )

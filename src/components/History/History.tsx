@@ -17,11 +17,11 @@ const History: FC = () => {
                 {history.map((item: string, index: number) => {
                     return (
                         <Grid container spacing={2} key={index}>
-                            <Grid item xs={10} onClick={()=> {dispatch(updateCity(item))}} className="history-city">
-                                <h6 data-testid="history">{item}</h6>
+                            <Grid item xs={10} onClick={()=> {dispatch(updateCity(item))}} className="history-city" data-testid="history-city">
+                                <h6 data-testid="city">{item}</h6>
                             </Grid>
                             <Grid item xs={2} className="history-icon">
-                                <i className="fa fa-trash" aria-hidden="true" onClick={() => {dispatch(deleteHistory(item))}}></i>
+                                <i className="fa fa-trash" aria-hidden="true" onClick={() => {dispatch(deleteHistory(item))}} data-testid="trash"></i>
                             </Grid>
                         </Grid>
                     );
