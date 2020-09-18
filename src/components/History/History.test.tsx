@@ -7,9 +7,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { history } from '../fakeData';
 import * as redux from 'react-redux';
-import { Grid } from '@material-ui/core';
-import { shallow } from 'enzyme';
-
+import { fireEvent } from '@testing-library/react';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
@@ -31,18 +29,18 @@ describe('History component',() => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('should update city', () => {
+    it('creates SELECT_CITY when update city has been done', () => {
         const city = "Paris";
-        const expectedActions = { type: SELECT_CITY, name: city};
-        let result = store.dispatch(updateCity(city));
-        expect(expectedActions).toEqual(result);
+        const expectedActions = [{ type: SELECT_CITY, name: city}];
+        store.dispatch(updateCity(city));
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
-    it('should delete history', () => {
+    it('creates DELETE_HISTORY when delete history has been done', () => {
         const city = "London";
-        const expectedActions = { type: DELETE_HISTORY, history: city};
-        let result = store.dispatch(deleteHistory(city));
-        expect(expectedActions).toEqual(result);
+        const expectedActions = [{ type: DELETE_HISTORY, history: city}];
+        store.dispatch(deleteHistory(city));
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
     it("should render a history", () => {
@@ -52,25 +50,21 @@ describe('History component',() => {
         expect(getAllByTestId("city")).toBeTruthy();
     });
 
-    it('test click event city', () => {
-        const mockCallBack = jest.fn();
-        const grid = shallow((<Grid onClick={mockCallBack}></Grid>));
-        grid.simulate('click');
-        expect(mockCallBack.mock.calls.length).toEqual(1);
-    });
-
-    it('test click event trash', () => {
-        const mockCallBack = jest.fn();
-        const i = shallow((<i onClick={mockCallBack}></i>));
-        i.simulate('click');
-        expect(mockCallBack.mock.calls.length).toEqual(1);
-    });
-
     it('should create history', () => {
-        const history = ["London", "Paris"];
-        let result = store.dispatch(createHistory(history));
         const expectedActions = { type: CREATE_HISTORY, history };
-        expect(expectedActions).toEqual(result);
+        store.dispatch(createHistory(history));
         expect(store.getActions()[0]).toEqual(expectedActions);
+    });
+
+    it('click on history city', () => {
+        const { getByTestId } = renderWithRedux(<History/>);
+        fireEvent.click(getByTestId("history-city"));
+        expect(getByTestId("history-city")).toHaveTextContent("Paris");
+    });
+
+    it('click on trash', () => {
+        const { getByTestId } = renderWithRedux(<History/>);
+        fireEvent.click(getByTestId("trash"));
+        expect(getByTestId("trash")).toBeTruthy();
     });
 });

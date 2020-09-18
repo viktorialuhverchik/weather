@@ -27,7 +27,8 @@ const PlacesAutoComplete: FC = () => {
                         setSelectedCity(city);
                         dispatch(setCityName(city));
                         dispatch(updateHistory(city));
-                    }
+                    },
+                    placeholder: "Select city..."
                 }}
             />
         </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './ToggleWeather.css';
 
 const ToggleWeather: FC = () => {
-    
+
     return (
         <div className="toggle-weather_container ">
             <Link to="/" className={`app-link today`}>Today</Link>
